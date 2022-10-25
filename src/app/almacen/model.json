@@ -1,0 +1,34 @@
+{
+  "title": "Almacen",
+  "entity": "almacen",
+  "api": {
+    "url": "http://localhost:8080/api/almacenes"
+  },
+  "filter": [
+    "cliente"
+  ],
+  "fields": [
+    {
+      "name": "id",
+      "label": "Id",
+      "isId": true,
+      "readonly": true,
+      "type": "number"
+    },
+    {
+      "name": "cliente",
+      "type": "string",
+      "label": "Cliente"
+    },
+    {
+      "name": "tipo",
+      "type": "string",
+      "label": "Tipo"
+    },    
+    {
+      "name": "tamanio",
+      "type": "number",
+      "label": "Tamaño"
+    }
+  ]
+}

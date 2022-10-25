@@ -1,0 +1,40 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Almacén</li>
+  </ol>
+</nav>
+<h2>Almacén Detalle</h2>
+<!-- todo: figure out better material styling for alerts -->
+<div *ngIf="feedback.message" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+<form *ngIf="almacen" #editForm="ngForm" (ngSubmit)="save()">
+
+  <mat-form-field>
+    <mat-label>Id</mat-label>
+    <input matInput [(ngModel)]="almacen.id" id="id" name="id" placeholder="Id" readonly> 
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label for="cliente">Cliente</mat-label>
+    <input matInput [(ngModel)]="almacen.cliente" id="cliente" name="cliente" placeholder="Cliente">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label for="tipo">Tipo</mat-label>
+    <mat-select [(ngModel)]="almacen.tipo" id="tipo" name="tipo" placeholder="Tipo">
+      <mat-option *ngFor="let tipo of tiposAlmacen" [value]="tipo">
+        {{tipo}}
+      </mat-option>
+    </mat-select>    
+  </mat-form-field>  
+
+  <mat-form-field>
+    <mat-label for="tamanio">Tamaño</mat-label>
+    <input matInput type="number" [(ngModel)]="almacen.tamanio" id="tamanio" name="tamanio" placeholder="Tamaño">
+  </mat-form-field>
+
+  <div class="button-row" role="group">
+    <button type="submit" mat-raised-button color="primary" [disabled]="!editForm.form.valid">Guardar</button>
+    <button type="button" mat-button color="accent" (click)="cancel()">Cancelar</button>
+  </div>
+</form>

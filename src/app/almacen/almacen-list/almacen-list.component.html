@@ -1,0 +1,54 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Almacén</li>
+  </ol>
+</nav>
+<h2>Almacenes</h2>
+<form #f="ngForm">
+  
+  <mat-form-field>
+    <mat-label>Cliente:</mat-label>
+    <input matInput type="search" [(ngModel)]="filter.cliente" id="cliente" name="cliente">
+  </mat-form-field>
+  
+  <button mat-mini-fab color="primary" (click)="search()" [disabled]="!f?.valid"><mat-icon>search</mat-icon></button>
+  <a mat-mini-fab color="accent" [routerLink]="['../almacenes', 'new' ]"><mat-icon>add</mat-icon></a>
+</form>
+<div *ngIf="almacenList.length > 0">
+  <!-- todo: figure out better material styling for alerts -->
+  <div *ngIf="feedback.message" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+  
+  <table mat-table #table [dataSource]="almacenList">
+    
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="cliente">
+      <mat-header-cell *matHeaderCellDef> Cliente </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.cliente}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="tipo">
+      <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.tipo}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="tamanio">
+      <mat-header-cell *matHeaderCellDef> Tamaño </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.tamanio}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+      <mat-cell *matCellDef="let item">
+        <a [routerLink]="['../almacenes', item.id ]" mat-raised-button color="primary">Editar</a>&nbsp;
+        <button (click)="delete(item)" mat-button color="warn"><mat-icon>delete</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </table>
+</div>

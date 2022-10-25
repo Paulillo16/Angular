@@ -1,0 +1,29 @@
+{
+  "title": "Estanteria",
+  "entity": "estanteria",
+  "api": {
+    "url": "http://localhost:8080/api/estanterias"
+  },
+  "filter": [
+    "tipo"
+  ],
+  "fields": [
+    {
+      "name": "id",
+      "label": "Id",
+      "isId": true,
+      "readonly": true,
+      "type": "number"
+    },
+    {
+      "name": "almacen",
+      "type": "Almacen",
+      "label": "Almacen"
+    },
+    {
+      "name": "tipo",
+      "type": "string",
+      "label": "Tipo"
+    }
+  ]
+}
